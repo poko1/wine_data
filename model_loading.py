@@ -20,7 +20,7 @@ def predict_user_input(new_test, folder, modelname, vectorname):
     print(final_out)
     new_test = [final_out]
     new_test = vectorizer.transform(new_test)
-    result = loaded_model.predict(new_test)
+    result = loaded_model.predict(new_test.toarray())
     print(result)
     print(loaded_model.predict(new_test).std())
     return result
