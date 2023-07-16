@@ -55,7 +55,17 @@ if __name__ == '__main__':
     #print(std_score_high)
     #print(std_price_low)
     #print(std_price_high)
-    if(result[0][0]<std_score_low or result[0][0]>std_score_high or result[0][1]<std_price_low or result[0][1]>std_price_high):
+    # calculate cosine similarity between this sentence and 100 random training sentences
+    df = df.sample(n = 100)
+    s = []
+    for i in df['description']:
+        doc1 = nlp(i)
+        doc2 = nlp(str)
+        s.append(doc1.similarity(doc2))
+
+    print(statistics.mean(s))
+    print(statistics.stdev(s))
+    if(result[0][0]<std_score_low or result[0][0]>std_score_high or result[0][1]<std_price_low or result[0][1]>std_price_high or statistics.mean(s)<0.91 or statistics.mean(s)>0.95):
        logging.info("Warning: model prediction crossed threshold")
     
 
