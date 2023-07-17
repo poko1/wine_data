@@ -6,7 +6,8 @@ from data_processing import process
 from model_training import train_test_model, vectorizing
 from model_loading import predict_user_input
 from sklearn.model_selection import train_test_split
-
+import spacy
+import statistics
 
 if __name__ == '__main__':
 
@@ -56,7 +57,8 @@ if __name__ == '__main__':
     #print(std_price_low)
     #print(std_price_high)
     # calculate cosine similarity between this sentence and 100 random training sentences
-    df = df.sample(n = 100)
+    df = df.sample(n = 2)
+    nlp = spacy.load("en_core_web_lg")
     s = []
     for i in df['description']:
         doc1 = nlp(i)
